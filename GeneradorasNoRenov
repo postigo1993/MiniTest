@@ -1,0 +1,90 @@
+pragma solidity ^0.4.25;
+
+contract GeneradorasNoRenov {
+
+    struct GeneradoraNoRenov {
+      address cuenta;
+      string nombre;
+      string cif;
+      uint32 saldoeuros;
+      uint32 saldoGET;
+      uint32 power; // potencia que genera la planta en W
+      uint16 CO2; // g de CO2 emitidos por hora
+      bool isValue; // para comprobar que existe la distribuidora
+    }
+
+    // Para poder acceder rapidamente a la informacion de una generadora a partir de su direccion
+    mapping(address => GeneradoraNoRenov) generanorenov;
+    // Para obtener un listado por el que iterar con todas las direcciones de las generadoras renovables existentes
+    address[] GenNoRenovList;
+
+
+    /*
+    * Para comprobar que el msg.sender es una generadora no renovable existente en el sistema
+    */
+    modifier esGenNoRenovValida(address _cuenta){
+        if(generanorenov[_cuenta].isValue){
+            _;
+        }
+    }
+
+    /*
+    * Para obtener una lista con todas las direcciones de generadoras no renovables en la que iterar
+    */
+    function listarGenNoRenov() public view returns (address[]) {
+        return GenNoRenovList;
+    }
+
+    /*
+    * Para obtener la informacion del nombre de una generadora no renovable a partir de su direccion
+    */
+    function getGenNoRenovNombre(address _cuenta) public view esGenNoRenovValida(_cuenta) returns (string){
+        return (generanorenov[_cuenta].nombre);
+    }
+
+    /*
+    * Para obtener la informacion del cif de una generadora no renovable a partir de su direccion
+    */
+    function getGenNoRenovCIF(address _cuenta) public view esGenNoRenovValida(_cuenta) returns (string){
+        return (generanorenov[_cuenta].cif);
+    }
+
+    /*
+    * Para obtener la informacion de la potencia de una generadora no renovable a partir de su direccion
+    */
+    function getGenNoRenovPower(address _cuenta) public view esGenNoRenovValida(_cuenta) returns (uint32){
+        return (generanorenov[_cuenta].power);
+    }
+
+    /*
+    * Para obtener la informacion del CO2 por hora que emite una generadora no renovable a partir de su direccion
+    */
+    function getGenNoRenovEmisiones(address _cuenta) public view esGenNoRenovValida(_cuenta) returns (uint16){
+        return (generanorenov[_cuenta].CO2);
+    }
+
+     /*
+    * Comprobar si existe una generadora no renovable en el sistema a partir de una direccion valida
+    */
+    function existeGenNoRenov(address _cuenta) public view returns (bool){
+        return generanorenov[_cuenta].isValue);
+    }
+
+    /*
+    * Comprueba que el saldo en euros de la planta generadora es distinto de cero
+    */
+    modifier tieneSaldoEuros {
+        if(usuarios[msg.sender].saldoeuros =! 0){
+            _;
+        }
+    }
+
+    /*
+    * Comprueba que el saldo en GETs de la planta generadora es distinto de cero
+    */
+    modifier tieneSaldoGETs {
+        if(usuarios[msg.sender].saldoGET =! 0){
+            _;
+        }
+    }
+}
