@@ -1,2 +1,2 @@
 # MiniTest
-# Repository with a test ok tokenization electric system
+# Repository with a test of tokenization electric system
