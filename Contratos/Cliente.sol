@@ -37,8 +37,8 @@ contract Clientes {
     /*
     * Comprueba que el cliente es quien quiere acceder a su propia informacion o es su distribuidora
     */
-    modifier tienePermisosPrivacidad (address _empleado){
-        if(_empleado == msg.sender || empleados[_empleado].empresa == msg.sender){
+    modifier tienePermisosPrivacidad (address _cliente){
+        if(_cliente == msg.sender || clientes[_cliente].distribuidora == msg.sender){
             _;
         }
     }
