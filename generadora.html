@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script src="logic.js"></script>
+</head>
+
+<body onload="getInfoGeneradora()">
+
+  <div id="generadora" class="row centrado">
+    <h2> Zona Generadora </h2>
+    <div class="cuadro">
+      <h4>Datos de la empresa </h4>
+      <label for="nGene"> Nombre: </label>
+      <span name = nGene id="nombreGene"> </span>
+      <br/><br/>
+      <label for="cGene"> CIF: </label>
+      <span name = cGene id="cifGene"> </span>
+      <br/><br/>
+      <label for="aGene"> Address: </label>
+      <span name = aGene id="addressGene"> </span>
+  <br/><br/>
+  <button type="button" onclick="logoutEmpresa()" >Cerrar sesion</button>
+    </div>
+      <div class="column-third cuadro">
+      <h4>Emitir tokens para socia distribuidora </h4>
+      <form>
+          <label for="DistriReceptor">Cuenta de la distribuidora receptora</label>
+          <br><br>
+          <input type="text" name="distriReceptor" id="distriReceptor"></input>
+          <br><br>
+          <label for="cantidadTokens">Cantidad</label>
+          <input type="number" name="cantidadTokens" id="cantidadTokens"/>
+          <br><br>
+          <button type="button" onclick="emitirTokens()" >Emitir tokens</button>
+        </form>
+      </div>
+
+      <div class="column-third cuadro">
+      <h4>Registrar nuevos socios distribuidores</h4>
+          <label for="nombreDistri">Nombre</label>
+          <input type="text" name="nombreDistri" id="nombreDistri"></input>
+          <br><br>
+          <label for="CIFDistri">CIF Distribuidora</label>
+          <input type="text" name="CIFDistri" id="CIFDistri"></input>
+          <br><br>
+          <label for="pssDistri">Password</label>
+          <input type="text" name="pssDistri" id="pssDistri"/>
+          <br><br>
+          <button type="button" id="registrarDistri" onclick="registrarDistri()" >Registrar distribuidora</button>
+      </div>
+
+      <div class="column-third cuadro">
+      <h4>Consultas</h4>
+          <button type="button" id="consultarDistri" onclick="consultarDistri()" >Mis socios</button>
+          <br><br>
+          <button type="button" id="consultarSaldo" onclick="consultarSaldo()" >Mis tokens</button>
+          <br><br>
+          <label for="saldoDistri">Cuenta de la distribuidora</label>
+          <input type="text" name="saldoDistri" id="saldoDistri"></input>
+          <br>
+          <button type="button" id="saldoDistriButton" onclick="consultarSaldoDistri()" >Tokens de la distribuidora</button>
+      </div>
+  </div>
+
+  <div id="console" class="cuadro">
+    <h2> Consola de resultados </h2>
+	   <p id="result"></p>
+     <button type="button" id="limpiar" onclick="limpiar()" >Limpiar</button>
+  </div>
+
+</body>
+</html>

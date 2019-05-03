@@ -1,0 +1,10 @@
+HTML:
+
+No he conseguido que los html me salgan por cuadros. Me sale todo en cascada.
+¿Cuando estamos llamando a las funciones que hemos programado?
+
+Solidity:
+
+Los parámetros que metemos en las funciones y modifiers pueden llamarse como queramos no?
+Me surje la duda cuando, por ejemplo, en Cliente.sol en un modifier llamo a address _cuenta
+y en otro address _cliente. Deduzco que no es lo mismo pero no sabria explicarlo.
