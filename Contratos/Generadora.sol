@@ -58,6 +58,13 @@ contract Generadoras {
         return (generadoras[_cuenta].cif);
     }
 
+    /*
+    * Para obtener la informacion del cif de una generadora a partir de su direccion
+    */
+    function getGeneDistri(address _cuenta) public view esGeneValida(_cuenta) returns (string){
+        return (generadoras[_cuenta].distribuidora);
+    }
+
 
      /*
     * Comprobar si existe una generadora en el sistema a partir de una direccion valida

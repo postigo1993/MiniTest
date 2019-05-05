@@ -47,8 +47,22 @@ contract Clientes {
     /*
     * Consultar el nombre de un cliente de la propia distribuidora
     */
-    function getClienteNombre(address _cuenta) public view tienePermisosPrivacidad(_cuenta) returns(string){
-            return(empleados[_cuenta].nombre);
+    function getClienteNombre(address _cuenta) public view esClienteValido(_cuenta) returns(string){
+            return(clientes[_cuenta].nombre);
+    }
+
+    /*
+    * Consultar el numero de cliente de un cliente de la propia distribuidora
+    */
+    function getClienteNum(address _cuenta) public view esClienteValido(_cuenta) returns(string){
+            return(clientes[_cuenta].numCliente);
+    }
+
+    /*
+    *Consultar la distribuidora de un cliente de la propia distribuidoras
+    */
+    function getClienteDistri(address _cuenta) public view esClienteValido(_cuenta) returns(string){
+           return(clientes[_cuenta].distribuidora);
     }
 
     /*

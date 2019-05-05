@@ -54,10 +54,17 @@ contract Distribuidoras {
 
 
     /*
-    * Para obtener la informacion del cif de una empresa a partir de su direccion
+    * Para obtener la informacion del cif de una distribuidora a partir de su direccion
     */
     function getDistriCIF(address _cuenta) public view esDistriValida(_cuenta) returns (string){
         return (distribuidoras[_cuenta].cif);
+    }
+
+    /*
+    * Para obtener la informacion de la generadora socia de una distribuidora a partir de su direccion
+    */
+    function getDistriGen(address _cuenta) public view esDistriValida(_cuenta) returns (string){
+        return (distribuidoras[_cuenta].generadora);
     }
 
 
