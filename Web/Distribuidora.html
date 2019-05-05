@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script src="logic.js"></script>
+</head>
+
+<body onload="getInfoDistribuidora()">
+
+  <div id="distribuidora" class="row centrado">
+    <h2> Area Distribuidora </h2>
+    <div class="cuadro">
+      <h4>Datos de la empresa </h4>
+      <label for="nDistrib"> Nombre: </label>
+      <span name = nDistrib id="nombreDistrib"> </span>
+      <br/><br/>
+      <label for="cDistrib"> CIF: </label>
+      <span name = cDistrib id="cifDistrib"> </span>
+      <br/><br/>
+      <label for="aDistrib"> Address: </label>
+      <span name = aDistrib id="addressDistrib"> </span>
+  <br/><br/>
+  <button type="button" onclick="logoutEmpresa()" >Cerrar sesion</button>
+    </div>
+      <div class="column-portada cuadro">
+      <h4>Emitir tokens para clientes </h4>
+      <form>
+          <label for="clienteReceptor">Cuenta del cliente receptor</label>
+          <br><br>
+          <input type="text" name="clienteReceptor" id="clienteReceptor"></input>
+          <br><br>
+          <label for="cantidadTokens">Cantidad</label>
+          <input type="number" name="cantidadTokens" id="cantidadTokens"/>
+          <br><br>
+          <button type="button" onclick="emitirTokens()" >Emitir tokens</button>
+        </form>
+      </div>
+      <div class="column-right cuadro">
+         <h4> Canjea tus tokens por energía </h4>
+         <label>Selecciona tu tarifa</label>
+         <br><br>
+           <span >1 MWh ( 900 token)</option>
+<button type="button" id="1kwh" onclick="canjearTokens1KWh()" >Canjear tokens</button>
+ <br><br>
+           <span >5 MWh ( 3600tokens)</option>
+          <button type="button" id="5KWh" onclick="canjearTokens5KWh()" >Canjear tokens</button>
+        </div>
+      </div>
+
+      <div class="column-portada cuadro">
+      <h4>Registrar nuevos clientes</h4>
+          <label for="nombreCliente">Nombre</label>
+          <input type="text" name="nombreCliente" id="nombreCliente"></input>
+          <br><br>
+          <label for="numCliente">Numero de cliente</label>
+          <input type="text" name="numCliente" id="numCliente"></input>
+          <br><br>
+          <label for="pssCliente">Password</label>
+          <input type="text" name="pssCliente" id="pssCliente"/>
+          <br><br>
+          <button type="button" id="registrarCliente" onclick="registrarCliente()" >Registrar cliente</button>
+      </div>
+
+      <div class="column-right cuadro">
+      <h4>Consultas</h4>
+          <button type="button" id="consultarClientes" onclick="consultarClientes()" >Mis clientes</button>
+          <br><br>
+          <button type="button" id="consultarSaldo" onclick="consultarSaldo()" >Mis tokens</button>
+          <br><br>
+          <label for="saldoCliente">Cuenta del cliente</label>
+          <input type="text" name="saldoCliente" id="saldoCliente"></input>
+          <br><br>
+          <button type="button" id="saldoClienteButton" onclick="consultarSaldoCliente()" >Tokens del cliente</button>
+      </div>
+  </div>
+
+  <div id="console" class="bottom cuadro">
+    <h2> Consola de resultados </h2>
+	   <p id="result"></p>
+     <button type="button" id="limpiar" onclick="limpiar()" >Limpiar</button>
+  </div>
+
+</body>
+</html>
