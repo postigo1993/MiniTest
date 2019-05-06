@@ -1,0 +1,97 @@
+
+// Pruebas unitarias "PlataformaTokens.sol"
+
+const OperacionesToken = artifacts.require("PlataformaTokens");
+const assert = require("chai").assert;
+const truffleAssert = require("truffle-assertions");
+
+contract("EventTest", async (accounts) => {
+
+/* Por dotar de mayor comprension durante todos los tests:
+accounts[0] es la cuenta administradora de la PlataformaTokens
+accounts[1] es el Alberto, cliente de Iberdrola
+accounts[2] es Maria, cliente de Endesa
+accounts[3] es Iberdrola, socia de una planta solar
+accounts[4] es Endesa, socia de una planta eólica
+accounts[5] es la generadora solar
+accounts[6] es la generadora eólica
+*/
+        it("Test0: Emite evento cuando se registra un cliente en el sistema", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.registrarCliente(accounts[1], "Alberto", "NUM1", "IBERDROLA", {from: accounts[3]});
+          truffleAssert.eventEmitted(response, "ClienteRegistrado", (evento) =>{
+            return evento._cuenta == accounts[1];
+          })
+        });
+
+        it("Test1: Emite evento cuando se registra una distribuidora en el sistema", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.registrarDistribuidora(accounts[3], "IBERDROLA", "CIF1", "SOLAR MADRID", {from: accounts[0]});
+          truffleAssert.eventEmitted(response, "DistribuidoraRegistrada", (evento) =>{
+            return evento._cuenta == accounts[3];
+          })
+        });
+
+        it("Test2: Emite evento cuando se registra una generadora en el sistema", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.registrarGeneradora(accounts[5], "SOLAR MADRID", "CIF1", "IBERDROLA", {from: accounts[0]});
+          truffleAssert.eventEmitted(response, "GeneradoraRegistrada", (evento) =>{
+            return evento._cuenta == accounts[5];
+          })
+        });
+
+        it("Test3: Emite evento cuando se transfieren tokens al registrar un cliente", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.registrarCliente(accounts[1], "Alberto", "NUM1", "IBERDROLA", {from: accounts[0]});
+          truffleAssert.eventEmitted(response, "TokensEmitidos", (evento) =>{
+            return evento._to == accounts[1];
+          })
+        });
+
+        it("Test4: Emite evento cuando se transfieren tokens al registrar una distribuidora", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.registrarDistribuidora(accounts[3], "IBERDROLA", "CIF1", "SOLAR MADRID", {from: accounts[0]});
+          truffleAssert.eventEmitted(response, "TokensEmitidos", (evento) =>{
+            return evento._to == accounts[3];
+          })
+        });
+
+        it("Test5: Emite evento cuando se transfieren tokens al registrar una generadora", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.registrarGeneradora(accounts[6], "EOLICA MADRID", "CIF1", "ENDESA", {from: accounts[0]});
+          truffleAssert.eventEmitted(response, "TokensEmitidos", (evento) =>{
+            return evento._to == accounts[6];
+          })
+        });
+
+        it("Test6: Emite evento cuando se emiten tokens para un cliente desde otro cliente", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.emitirTokens(accounts[2], 10, {from: accounts[1]});
+          truffleAssert.eventEmitted(response, "TokensEmitidos", (evento) =>{
+            return evento._to == accounts[2];
+          })
+        });
+
+        it("Test7: Emite evento cuando se emiten tokens desde un cliente a su distribuidora", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.emitirTokens(accounts[4], 10, {from: accounts[2]});
+          truffleAssert.eventEmitted(response, "TokensEmitidos", (evento) =>{
+            return evento._to == accounts[4];
+          })
+        });
+
+        it("Test8: Emite evento cuando se emiten tokens para un cliente desde su distribuidora", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.emitirTokens(accounts[1], 10, {from: accounts[3]});
+          truffleAssert.eventEmitted(response, "TokensEmitidos", (evento) =>{
+            return evento._to == accounts[1];
+          })
+        });
+
+        it("Test9: Emite evento cuando se emiten tokens para una generadora desde su distribuidora socia", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.emitirTokens(accounts[5], 10, {from: accounts[3]});
+          truffleAssert.eventEmitted(response, "TokensEmitidos", (evento) =>{
+            return evento._to == accounts[5];
+          })
+        });

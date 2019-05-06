@@ -183,3 +183,33 @@ accounts[6] es la generadora eólica
           let response = await plataforma.existeCliente.call(accounts[2], {from: accounts[4]});
           assert.equal(response, true);
         });
+
+        it("Test16: Comprobar que no existe un cliente en el sistema (FALSE)", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.existeCliente.call(accounts[9], {from: accounts[3]});
+          assert.equal(response, false);
+        });
+
+        it("Test17: Comprobar que existe una distribuidora en el sistema (TRUE)", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.existeDistri.call(accounts[3], {from: accounts[3]});
+          assert.equal(response, true);
+        });
+
+        it("Test18: Comprobar que no existe una distribuidora en el sistema (FALSE)", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.existeDistri.call(accounts[9], {from: accounts[3]});
+          assert.equal(response, false);
+        });
+
+        it("Test19: Comprobar que existe una generadora en el sistema (TRUE)", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.existeGene.call(accounts[6], {from: accounts[6]});
+          assert.equal(response, true);
+        });
+
+        it("Test20: Comprobar que no existe una distribuidora en el sistema (FALSE)", async () => {
+          let plataforma = await OperacionesToken.deployed();
+          let response = await plataforma.existeGene.call(accounts[9], {from: accounts[6]});
+          assert.equal(response, false);
+        });
