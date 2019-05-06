@@ -18,10 +18,10 @@ contract PlataformaTokens is Empresas, Empleados, Token, Owned {
     /*
     * Anadir una nueva generadora en el sistema
     */
-    function registrarGeneradora(address _cuenta, string _nombre, string _cif) public onlyOwner {
+    function registrarGeneradora(address _cuenta, string _nombre, string _cif, address _distribuidora) public onlyOwner {
 
         // Se anade a la tabla general de generadoras
-        generadoras[_cuenta] = Generadora(_cuenta, _nombre, _cif, true);
+        generadoras[_cuenta] = Generadora(_cuenta, _nombre, _cif, _distribuidora, true);
 
         // se anade a la lista de direcciones de generadoras
         GeneraList.push(_cuenta);
@@ -108,7 +108,7 @@ contract PlataformaTokens is Empresas, Empleados, Token, Owned {
     /*
     * Una cliente puede invocar a esta funcion para transferir tokens a otro cliente
     */
-    function transferirTokensCC(address _to, uint256 _n) public esClienteValido(_to){
+    function transferirTokensCC(address _to, uint256 _n) public esClienteValido(msg.sender) esClienteValido(_to){
 
         // se transfieren los tokens
         transfer(_to, _n);

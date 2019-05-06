@@ -47,21 +47,21 @@ contract Clientes {
     /*
     * Consultar el nombre de un cliente de la propia distribuidora
     */
-    function getClienteNombre(address _cuenta) public view esClienteValido(_cuenta) returns(string){
+    function getClienteNombre(address _cuenta) public view tienePermisosPrivacidad(_cuenta) returns(string){
             return(clientes[_cuenta].nombre);
     }
 
     /*
     * Consultar el numero de cliente de un cliente de la propia distribuidora
     */
-    function getClienteNum(address _cuenta) public view esClienteValido(_cuenta) returns(string){
+    function getClienteNum(address _cuenta) public view tienePermisosPrivacidad(_cuenta) returns(string){
             return(clientes[_cuenta].numCliente);
     }
 
     /*
     *Consultar la distribuidora de un cliente de la propia distribuidoras
     */
-    function getClienteDistri(address _cuenta) public view esClienteValido(_cuenta) returns(string){
+    function getClienteDistri(address _cuenta) public view tienePermisosPrivacidad(_cuenta) returns(string){
            return(clientes[_cuenta].distribuidora);
     }
 
@@ -77,7 +77,7 @@ contract Clientes {
     * Comprobar si existe el cliente en el sistema a partir de una direccion valida
     */
     function existeCliente(address _cuenta) public view returns (bool){
-        return (empleados[_cuenta].isValue);
+        return (clientes[_cuenta].isValue);
     }
 
 }

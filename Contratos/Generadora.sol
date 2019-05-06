@@ -5,7 +5,7 @@ contract Generadoras {
     struct Generadora {
       address cuenta;
       string nombre;
-      string distribuidora;
+      address distribuidora;
       string cif;
       bool isValue;
     }
@@ -26,7 +26,7 @@ contract Generadoras {
     }
 
     /*
-    * Comprueba que la generadora actualmente tiene contratada a la distribuidora que llama a la funcion (msg.sender)
+    * Comprueba que la generadora actualmente es socia la distribuidora que llama a la funcion (msg.sender)
     */
     modifier GeneradoraEsDeLaDistribuidora (address _generadora){
         if(generadoras[_generadora].distribuidora == msg.sender){
@@ -59,7 +59,7 @@ contract Generadoras {
     }
 
     /*
-    * Para obtener la informacion del cif de una generadora a partir de su direccion
+    * Para obtener la informacion de la distribuidora socia de una generadora a partir de su direccion
     */
     function getGeneDistri(address _cuenta) public view esGeneValida(_cuenta) returns (string){
         return (generadoras[_cuenta].distribuidora);

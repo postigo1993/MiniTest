@@ -28,7 +28,7 @@ contract Distribuidoras {
     }
 
     /*
-    * Comprueba que la distribuidora actualmente este trabajando para la empresa que llama a la funcion (msg.sender)
+    * Comprueba que la distribuidora actualmente es socia de la generadora que llama a la funcion (msg.sender)
     */
     modifier DistribuidoraEsDeLaGeneradora (address _distribuidora){
         if(distribuidoras[_distribuidora].generadora == msg.sender){
