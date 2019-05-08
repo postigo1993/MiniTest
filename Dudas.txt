@@ -1,17 +1,25 @@
 HTML:
 
 No he conseguido que los html me salgan por cuadros. Me sale todo en cascada.
+```
+syle.css
+```
 ¿Cuando estamos llamando a las funciones que hemos programado?
-
+```
+en el onclick de los botones en el HTML
+````
 Solidity:
 
 Los parámetros que metemos en las funciones y modifiers pueden llamarse como queramos no?
 Me surje la duda cuando, por ejemplo, en Cliente.sol en un modifier llamo a address _cuenta
 y en otro address _cliente. Lo haces tu también en Empleados.sol.Deduzco que no es lo mismo
 pero no sabria explicarlo.
+```
+nombres de variables, unifica, es lo mismo
+```
 
 Github:
-La carpeta contratos me ha ayudado Jerai a subirla después de un rato. Habia problemas con la rama
+La carpeta contratos me ha ayudado Yerai a subirla después de un rato. Habia problemas con la rama
 Ahora lo he vuelto a intentar y me sale esto:
 
 error: failed to push some refs to 'https://github.com/postigo1993/MiniTest.git'
@@ -22,3 +30,10 @@ hint: (e.g., 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 Lo he subido a pelo
+```
+te faltaba hacer un pull para actualizar tus cambios en local. En ultima instancia, al ser un repo tuyo, podrías haber hecho un push --force
+```
+
+```
+TODO: Hacer este repo privado
+```
