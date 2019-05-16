@@ -1,6 +1,6 @@
 pragma solidity ^0.4.25;
 
-contract Clientes {
+contract Cliente {
 
     struct Cliente {
       address cuenta;
@@ -61,7 +61,7 @@ contract Clientes {
     /*
     *Consultar la distribuidora de un cliente de la propia distribuidoras
     */
-    function getClienteDistri(address _cuenta) public view tienePermisosPrivacidad(_cuenta) returns(string){
+    function getClienteDistri(address _cuenta) public view tienePermisosPrivacidad(_cuenta) returns(address){
            return(clientes[_cuenta].distribuidora);
     }
 

@@ -1,11 +1,12 @@
 pragma solidity ^0.4.25;
 
 import "./Token.sol";
-import "./Empresas.sol";
-import "./Empleados.sol";
+import "./Cliente.sol";
+import "./Distribuidora.sol";
+import "./Generadora.sol";
 import "./Owned.sol";
 
-contract PlataformaTokens is Empresas, Empleados, Token, Owned {
+contract OperacionesToken is Cliente, Distribuidora, Generadora, Token, Owned {
 
     /*
     * Eventos
@@ -18,10 +19,10 @@ contract PlataformaTokens is Empresas, Empleados, Token, Owned {
     /*
     * Anadir una nueva generadora en el sistema
     */
-    function registrarGeneradora(address _cuenta, string _nombre, string _cif, address _distribuidora) public onlyOwner {
+    function registrarGeneradora(address _cuenta, string _nombre, address _distribuidora, string _cif) public onlyOwner {
 
         // Se anade a la tabla general de generadoras
-        generadoras[_cuenta] = Generadora(_cuenta, _nombre, _cif, _distribuidora, true);
+        generadoras[_cuenta] = Generadora(_cuenta, _nombre, _distribuidora, _cif, true);
 
         // se anade a la lista de direcciones de generadoras
         GeneraList.push(_cuenta);
@@ -50,7 +51,7 @@ contract PlataformaTokens is Empresas, Empleados, Token, Owned {
         // se le transfieren una cantidad de tokens iniciales
         emitirTokensRegistroD(_cuenta);
 
-        emit DistribuidoraRegistrada(distribuidoras[_cuenta].cuenta, distribuidoras[_cuenta].nombre, distribuidoras[_cuenta].cif);
+        emit DistribuidoraRegistrada(distribuidoras[_cuenta].cuenta, distribuidoras[_cuenta].nombre, distribuidoras[_cuenta].cif, distribuidoras[_cuenta].generadora);
 
     }
 
@@ -170,3 +171,18 @@ contract PlataformaTokens is Empresas, Empleados, Token, Owned {
 
         emit TokensEmitidos(msg.sender, _to, _n);
     }
+
+    /*
+    * Un cliente puede invocar a esta funcion para canjear sus tokens por premios con una distribuidora
+    */
+    function canjearTokens(uint256 _n) public{
+
+        // encontramos la distribuidora a la que pertenece el cliente
+        address distribuidora = clientes[msg.sender].distribuidora;
+
+        // se transfieren los tokens a la empresa
+        transfer(distribuidora, _n);
+
+        emit TokensEmitidos(msg.sender, distribuidora, _n);
+    }
+}

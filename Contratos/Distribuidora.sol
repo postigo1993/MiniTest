@@ -1,6 +1,6 @@
 pragma solidity ^0.4.25;
 
-contract Distribuidoras {
+contract Distribuidora {
 
     struct Distribuidora {
       address cuenta;
@@ -63,7 +63,7 @@ contract Distribuidoras {
     /*
     * Para obtener la informacion de la generadora socia de una distribuidora a partir de su direccion
     */
-    function getDistriGen(address _cuenta) public view esDistriValida(_cuenta) returns (string){
+    function getDistriGen(address _cuenta) public view esDistriValida(_cuenta) returns (address){
         return (distribuidoras[_cuenta].generadora);
     }
 
